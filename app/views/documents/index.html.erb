@@ -1,0 +1,26 @@
+<h1>Uploaded Documents</h1>
+
+<%= link_to 'Upload a new document', new_document_path, class: 'button' %>
+
+<table>
+  <tr>
+    <th>File</th>
+  </tr>
+  <% if @organization_documents.present? %>
+    <% @organization_documents.each do |document| %>
+      <tr>
+        <td>
+          <% if document.file.attached? %>
+            <%= link_to document.file.filename, rails_blob_path(document.file, disposition: 'inline') %>
+          <% else %>
+            No file attached
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td>No documents available</td>
+    </tr>
+  <% end %>
+</table>
